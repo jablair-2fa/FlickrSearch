@@ -49,8 +49,16 @@ extension DataRenderer where T: Decodable {
     static var jsonRenderer: DataRenderer<T> {
         return DataRenderer<T> { data in
             let decoder = JSONDecoder()
-            let object = try decoder.decode(T.self, from: data)
-            return object
+            do {
+                let object = try decoder.decode(T.self, from: data)
+                return object
+            } catch {
+                let initialError = error
+                let flickrError = try? decoder.decode(FlickrError.self, from: data)
+                
+                throw flickrError ?? initialError
+            }
         }
     }
 }
+

@@ -9,11 +9,13 @@
 import Foundation
 
 /// Model of a Flick error response
-struct FlickrError: Codable, Error, Equatable {
+struct FlickrError: Codable, LocalizedError, Equatable {
     /// The error code
     let code: Int
     /// The error message
     let message: String
+    
+    var errorDescription: String? { return message }
 }
 
 extension FlickrError {

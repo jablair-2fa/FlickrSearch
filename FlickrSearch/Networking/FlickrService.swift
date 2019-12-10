@@ -51,9 +51,11 @@ final class FlickrService {
         let renderer: DataRenderer<T>
     }
     
-    enum Error: Swift.Error {
+    enum Error: LocalizedError {
         case invalidRequest
         case networkFailure(Swift.Error)
         case emptyResponse
+        
+        var errorDescription: String? { return "Networking Error" }
     }
 }
