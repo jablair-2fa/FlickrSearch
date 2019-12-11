@@ -74,16 +74,17 @@ class FlickrSearchResultsViewController: UIViewController {
         tableView.dataSource = dataSource
         tableView.delegate = self
     }
-    
+
     func performSearch(for page: Int = 1) {
         guard let searchTerm = searchTerm else { return }
         do {
-            let searchResuest: FlickrService.Request<SearchResults> = try .search(for: searchTerm)
+            let searchResuest: FlickrService.Request<SearchResults> = try .search(for: searchTerm, page: page)
             currentSearchToken = flickrService.request(searchResuest) { [unowned self] (result) in
                 do {
                     let searchResults = try result.get()
                     self.lastSearchMetadata = searchResults.metadata
-
+                    self.currentSearchToken = nil
+                    
                     DispatchQueue.main.async {
                         var snapshot = NSDiffableDataSourceSnapshot<Section, Photo>()
                         snapshot.appendSections([.photos])
@@ -128,6 +129,29 @@ extension FlickrSearchResultsViewController: UITableViewDelegate {
         }
         
         delegate?.show(photo: photo, from: self)
+    }
+}
+
+extension FlickrSearchResultsViewController: UIScrollViewDelegate {
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        guard
+            currentSearchToken == nil,
+            let lastSearchMetadata = lastSearchMetadata
+            else {
+                // Refresh in progress or we have no idea about the search state, so do nothing
+                return
+        }
+        
+        let bottomEdge = targetContentOffset.pointee.y + scrollView.frame.size.height;
+        if (bottomEdge >= scrollView.contentSize.height) {
+            let nextPage = lastSearchMetadata.page + 1
+            guard nextPage < 160 else {
+                // Per Flickr document, a search query will only return the first 4000 results. At 25 per page, that 160 pages
+                return
+            }
+            
+            performSearch(for: nextPage)
+        }
     }
 }
 
