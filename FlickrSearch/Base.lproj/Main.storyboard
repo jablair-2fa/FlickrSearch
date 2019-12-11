@@ -7,10 +7,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Master-->
+        <!--Navigation Controller-->
         <scene sceneID="pY4-Hu-kfo">
             <objects>
-                <navigationController title="Master" id="RMx-3f-FxP" sceneMemberID="viewController">
+                <navigationController title="Navigation Controller" id="RMx-3f-FxP" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="Pmd-2v-anx">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -23,10 +23,10 @@
             </objects>
             <point key="canvasLocation" x="-38" y="-630"/>
         </scene>
-        <!--Master-->
+        <!--FlickrSearch-->
         <scene sceneID="smW-Zh-WAh">
             <objects>
-                <tableViewController title="Master" clearsSelectionOnViewWillAppear="NO" id="7bK-jq-Zjz" customClass="FlickrSearchViewController" customModule="FlickrSearch" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="FlickrSearch" clearsSelectionOnViewWillAppear="NO" id="7bK-jq-Zjz" customClass="FlickrSearchViewController" customModule="FlickrSearch" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="r7i-6Z-zg0">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -56,7 +56,7 @@
                             <outlet property="delegate" destination="7bK-jq-Zjz" id="RA6-mI-bju"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Master" id="Zdf-7t-Un8"/>
+                    <navigationItem key="navigationItem" title="FlickrSearch" id="Zdf-7t-Un8"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rux-fX-hf1" sceneMemberID="firstResponder"/>
             </objects>
@@ -77,10 +77,15 @@
                                     <outletCollection property="gestureRecognizers" destination="MA0-Ce-RLC" appends="YES" id="vhK-gD-Vib"/>
                                 </connections>
                             </imageView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="osK-xc-rgK">
+                                <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="osK-xc-rgK" firstAttribute="centerX" secondItem="uxS-7y-R1I" secondAttribute="centerX" id="ORC-cx-Jlq"/>
                             <constraint firstItem="Niz-d0-NXs" firstAttribute="leading" secondItem="uxS-7y-R1I" secondAttribute="leading" id="Qhr-Wy-NkX"/>
+                            <constraint firstItem="osK-xc-rgK" firstAttribute="centerY" secondItem="uxS-7y-R1I" secondAttribute="centerY" id="THM-8z-EeU"/>
                             <constraint firstItem="Niz-d0-NXs" firstAttribute="top" secondItem="uxS-7y-R1I" secondAttribute="top" id="a0k-pE-iez"/>
                             <constraint firstAttribute="trailing" secondItem="Niz-d0-NXs" secondAttribute="trailing" id="boY-X4-bXd"/>
                             <constraint firstAttribute="bottom" secondItem="Niz-d0-NXs" secondAttribute="bottom" id="iJp-q5-6J7"/>
@@ -89,6 +94,7 @@
                     </view>
                     <connections>
                         <outlet property="imageView" destination="Niz-d0-NXs" id="Uh8-ZF-5UH"/>
+                        <outlet property="loadIndicator" destination="osK-xc-rgK" id="lbE-10-9Tg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HvF-KC-dHj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

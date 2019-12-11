@@ -14,6 +14,7 @@ final class PhotoViewerViewController: UIViewController {
     let viewModel: PhotoViewerViewModel
 
     @IBOutlet private var imageView: UIImageView!
+    @IBOutlet private var loadIndicator: UIActivityIndicatorView!
     
     init?(coder: NSCoder, viewModel: PhotoViewerViewModel) {
         self.viewModel = viewModel
@@ -40,6 +41,7 @@ final class PhotoViewerViewController: UIViewController {
             }
             
             DispatchQueue.main.async {
+                self.loadIndicator.stopAnimating()
                 self.imageView.image = displayImage
                 self.setImageViewMode()
             }

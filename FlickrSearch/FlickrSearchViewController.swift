@@ -42,6 +42,7 @@ class FlickrSearchViewController: UITableViewController {
         
         let searchController = UISearchController(searchResultsController: searchResultsController)
         searchController.searchBar.delegate = self
+        searchController.searchResultsUpdater = self
         
         navigationItem.searchController = searchController
     }
@@ -113,8 +114,6 @@ class FlickrSearchViewController: UITableViewController {
             self.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
         })
     }
-    
-
 }
 
 extension FlickrSearchViewController: UISearchBarDelegate {
@@ -126,6 +125,16 @@ extension FlickrSearchViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.text = nil
         searchBar.resignFirstResponder()
+    }
+}
+
+extension FlickrSearchViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard searchController.searchBar.text?.isEmpty != false else {
+            return
+        }
+        
+        searchResultsController.searchTerm = nil
     }
 }
 
