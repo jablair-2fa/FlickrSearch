@@ -85,6 +85,7 @@ class FlickrSearchViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         navigationItem.searchController?.searchBar.text = searchTerms[indexPath.row]
+        navigationItem.searchController?.searchBar.becomeFirstResponder()
         tableView.deselectRow(at: indexPath, animated: true)
         performSearch()
     }
