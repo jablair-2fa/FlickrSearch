@@ -8,13 +8,19 @@
 
 import UIKit
 
+/// Cell for displaying photo and thumbnail
 class PhotoTableViewCell: UITableViewCell {
+    /// The thumbnail image  view
     @IBOutlet private var photoView: UIImageView!
+    /// The image title
     @IBOutlet private var titleLabel: UILabel!
+    /// The download indicator
     @IBOutlet private var downloadIndicator: UIActivityIndicatorView!
     
+    /// Cell reuse identifier
     static var reuseIdentifier: String = "PhotoTableViewCell"
     
+    /// View Model mapping the photo to the cell appearance
     var viewModel: PhotoTableViewCellViewModel? {
         didSet {
             titleLabel.text = viewModel?.title
@@ -37,22 +43,8 @@ class PhotoTableViewCell: UITableViewCell {
         }
     }
     
-    
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-    
     override func prepareForReuse() {
         viewModel?.cancelThumnailRequest()
         viewModel = nil
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
 }

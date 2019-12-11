@@ -8,14 +8,23 @@
 
 import UIKit
 
+/// Flickr photo viewer
 final class PhotoViewerViewController: UIViewController {
+    /// Storyboard identifier
     static let identifier = "PhotoViewController"
     
+    /// The photo view model
     let viewModel: PhotoViewerViewModel
-
+    
+    /// The image view
     @IBOutlet private var imageView: UIImageView!
+    /// The loading indicator
     @IBOutlet private var loadIndicator: UIActivityIndicatorView!
     
+    /// Initialized a photo viewer with a view model
+    /// - Parameters:
+    ///   - coder: The coder
+    ///   - viewModel: The view model
     init?(coder: NSCoder, viewModel: PhotoViewerViewModel) {
         self.viewModel = viewModel
         super.init(coder: coder)
@@ -54,6 +63,8 @@ final class PhotoViewerViewController: UIViewController {
         setImageViewMode()
     }
     
+    /// Shows or hides the navigation bar for an immersive experience
+    /// - Parameter sender: The sender
     @IBAction func toggleNavigationBarVisibility(_ sender: Any) {
         guard let navigationController = navigationController else { return }
         
@@ -61,6 +72,7 @@ final class PhotoViewerViewController: UIViewController {
         navigationController.setNavigationBarHidden(!navigationController.isNavigationBarHidden, animated: true)
     }
     
+    /// Updates the image view content mode to provide the best appearance
     private func setImageViewMode() {
         guard let image = imageView.image else { return }
         if imageView.bounds.width > image.size.width && imageView.bounds.height > image.size.height {

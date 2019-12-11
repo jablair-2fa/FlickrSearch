@@ -8,19 +8,25 @@
 
 import UIKit
 
+/// Root search interface for FlickSearch.
+///
+/// Offers a search bar, display of search results, and quick search capability for previous search results
 class FlickrSearchViewController: UITableViewController {
     
+    /// The Flickr networking service
     var flickrService: FlickrService!
     
+    /// UserDefaults key for storing previous search terms
     private static let storedSearchTermsKey = "storedSearchTerms"
     
-    /// Previous search terms
+    /// Previous search terms. Max of 20
     private var searchTerms: [String]! {
         didSet {
             UserDefaults.standard.set(searchTerms, forKey: Self.storedSearchTermsKey)
         }
     }
     
+    /// The search results controller
     private var searchResultsController: FlickrSearchResultsViewController!
     
     override func viewDidLoad() {
@@ -58,7 +64,7 @@ class FlickrSearchViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Recent Searches"
+        return NSLocalizedString("RecentSearches-SectionTitle", value: "Recent Searches", comment: "Title of the recent searches section")
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -68,7 +74,6 @@ class FlickrSearchViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
         return true
     }
 
@@ -76,14 +81,13 @@ class FlickrSearchViewController: UITableViewController {
         if editingStyle == .delete {
             searchTerms.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
         }
     }
     
     // MARK: - Table View Delegate
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Handle selecting a previous search
         navigationItem.searchController?.searchBar.text = searchTerms[indexPath.row]
         navigationItem.searchController?.searchBar.becomeFirstResponder()
         tableView.deselectRow(at: indexPath, animated: true)
@@ -104,10 +108,23 @@ class FlickrSearchViewController: UITableViewController {
         // Update the saved search terms
         var deletionIndexPath: IndexPath? = nil
         if let searchTermIndex = self.searchTerms.firstIndex(of: searchText) {
+            guard searchTermIndex > 0 else {
+                // If we're using the first quick search term, don't do anything
+                return
+            }
+            
             deletionIndexPath = IndexPath(row: searchTermIndex, section: 0)
             self.searchTerms.remove(at: searchTermIndex)
         }
+        
+        if searchTerms.count == 20, deletionIndexPath == nil {
+            // We're about to exceed the max search term count, so drop the last item
+            let _ = self.searchTerms.popLast()
+            deletionIndexPath = IndexPath(row: self.searchTerms.endIndex, section: 0)
+        }
+        
         self.searchTerms.insert(searchText, at: 0)
+        
         self.tableView.performBatchUpdates({
             if let deletionIndexPath = deletionIndexPath {
                 self.tableView.deleteRows(at: [deletionIndexPath], with: .automatic)

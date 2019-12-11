@@ -8,13 +8,22 @@
 
 import Foundation
 
+/// Flickr Networking interface
 final class FlickrService {
+    /// The URL session
     private let urlSession: URLSession
     
+    /// Configures the networking interface
+    /// - Parameter urlSession: The URL session. Optional, defaults to `.shared`.
     init(urlSession: URLSession = .shared) {
         self.urlSession = urlSession
     }
     
+    /// Submits a network request
+    /// - Parameters:
+    ///   - request: The request
+    ///   - completion: The completion handler
+    /// - Returns: A cancellation token
     @discardableResult
     func request<T>(_ request: Request<T>, completion: ((Result<T, Swift.Error>) -> ())?) -> NetworkToken {
         
@@ -46,16 +55,26 @@ final class FlickrService {
         return token
     }
     
+    /// The Request type
     struct Request<T> {
+        /// The URL for the request
         let url: URL
+        /// The response renderer
         let renderer: DataRenderer<T>
     }
     
+    /// Generic network service errors
     enum Error: LocalizedError {
         case invalidRequest
         case networkFailure(Swift.Error)
         case emptyResponse
         
-        var errorDescription: String? { return "Networking Error" }
+        var errorDescription: String? {
+            switch self {
+            case .invalidRequest: return "The URL could not be constructed for the request"
+            case .networkFailure(let error): return error.localizedDescription
+            case .emptyResponse: return "The repsonse payload did not contain any data"
+            }
+        }
     }
 }

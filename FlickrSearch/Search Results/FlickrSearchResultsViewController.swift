@@ -8,17 +8,27 @@
 
 import UIKit
 
+/// Search results table view controller
 class FlickrSearchResultsViewController: UIViewController {
+    /// Storyboard identifier
+    static let identifier = "FlickSearchResultsViewController"
+
+    /// The table view
     @IBOutlet private var tableView: UITableView!
     
-    static let identifier = "FlickSearchResultsViewController"
-    
+    /// The flickr networking interface
     private let flickrService: FlickrService
+    /// The current search token
     private var currentSearchToken: NetworkToken?
+    /// The last retrieved search metadata
     private var lastSearchMetadata: SearchMetadata?
     
+    /// The search results delegate
     weak var delegate: FlickrSearchResultsViewControllerDelegate?
-
+    
+    /// The current search term
+    /// Setting the search term to a non-empty string triggers a new search. Setting
+    /// to an empty string clears the search results
     var searchTerm: String? {
         didSet {
             guard searchTerm != oldValue else { return }
@@ -28,6 +38,7 @@ class FlickrSearchResultsViewController: UIViewController {
             
             var snapshot = NSDiffableDataSourceSnapshot<Section, Photo>()
             snapshot.deleteAllItems()
+            snapshot.appendSections([.photos])
             dataSource.apply(snapshot, animatingDifferences: false)
 
             guard searchTerm?.isEmpty == false else {
@@ -38,11 +49,17 @@ class FlickrSearchResultsViewController: UIViewController {
         }
     }
     
+    /// Diffable data source sections
     private enum Section { case photos }
     
     /// The diffable data source
     private var dataSource: UITableViewDiffableDataSource<Section, Photo>!
     
+    /// Configures a search results view controller
+    /// - Parameters:
+    ///   - coder: The coder
+    ///   - delegate: The delegate, if any
+    ///   - flickrService: The Flickr networking interface
     required init?(coder: NSCoder, delegate: FlickrSearchResultsViewControllerDelegate? = nil, flickrService: FlickrService) {
         self.flickrService = flickrService
         self.delegate = delegate
@@ -57,6 +74,7 @@ class FlickrSearchResultsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Set up the difftable data source
         dataSource = UITableViewDiffableDataSource<Section, Photo>(tableView: tableView)  { [weak self] (tableView, indexPath, photo) -> UITableViewCell? in
             
             guard
@@ -74,7 +92,9 @@ class FlickrSearchResultsViewController: UIViewController {
         tableView.dataSource = dataSource
         tableView.delegate = self
     }
-
+    
+    /// Executes the search for the given page
+    /// - Parameter page: The page of search results to request. Optional, defaults to 1.
     func performSearch(for page: Int = 1) {
         guard let searchTerm = searchTerm else { return }
         do {
@@ -89,7 +109,8 @@ class FlickrSearchResultsViewController: UIViewController {
                         var snapshot = NSDiffableDataSourceSnapshot<Section, Photo>()
                         snapshot.appendSections([.photos])
                         snapshot.appendItems(searchResults.photos)
-                        self.dataSource.apply(snapshot)
+                        let animate = self.dataSource.tableView(self.tableView, numberOfRowsInSection: 0) > 0
+                        self.dataSource.apply(snapshot, animatingDifferences: animate)
                     }
                 } catch {
                     self.present(requestError: error)
@@ -128,6 +149,9 @@ extension FlickrSearchResultsViewController: UITableViewDelegate {
             return
         }
         
+        // Bit of a hack to get around the search controller not getting view lifecycle callback
+        tableView.deselectRow(at: indexPath, animated: true)
+        
         delegate?.show(photo: photo, from: self)
     }
 }
@@ -146,7 +170,7 @@ extension FlickrSearchResultsViewController: UIScrollViewDelegate {
         if (bottomEdge >= scrollView.contentSize.height) {
             let nextPage = lastSearchMetadata.page + 1
             guard nextPage < 160 else {
-                // Per Flickr document, a search query will only return the first 4000 results. At 25 per page, that 160 pages
+                // Per Flickr documentation, a search query will only return the first 4000 results. At 25 per page, that 160 pages
                 return
             }
             
@@ -155,7 +179,11 @@ extension FlickrSearchResultsViewController: UIScrollViewDelegate {
     }
 }
 
-
+/// Delegate protocol for handling photo actions
 protocol FlickrSearchResultsViewControllerDelegate: AnyObject {
+    /// Informs the reciever that a photo should be shown
+    /// - Parameters:
+    ///   - photo: The photo
+    ///   - viewController: The sender
     func show(photo: Photo, from viewController: FlickrSearchResultsViewController)
 }
