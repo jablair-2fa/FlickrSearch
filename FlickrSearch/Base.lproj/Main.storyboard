@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -60,6 +61,120 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rux-fX-hf1" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="709" y="-630"/>
+        </scene>
+        <!--Photo Viewer View Controller-->
+        <scene sceneID="NPS-ef-kml">
+            <objects>
+                <viewController storyboardIdentifier="PhotoViewController" id="fd2-lK-HcB" customClass="PhotoViewerViewController" customModule="FlickrSearch" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="uxS-7y-R1I">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Niz-d0-NXs">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="MA0-Ce-RLC" appends="YES" id="vhK-gD-Vib"/>
+                                </connections>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Niz-d0-NXs" firstAttribute="leading" secondItem="uxS-7y-R1I" secondAttribute="leading" id="Qhr-Wy-NkX"/>
+                            <constraint firstItem="Niz-d0-NXs" firstAttribute="top" secondItem="uxS-7y-R1I" secondAttribute="top" id="a0k-pE-iez"/>
+                            <constraint firstAttribute="trailing" secondItem="Niz-d0-NXs" secondAttribute="trailing" id="boY-X4-bXd"/>
+                            <constraint firstAttribute="bottom" secondItem="Niz-d0-NXs" secondAttribute="bottom" id="iJp-q5-6J7"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="qRW-Mk-vlb"/>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="Niz-d0-NXs" id="Uh8-ZF-5UH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HvF-KC-dHj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="MA0-Ce-RLC">
+                    <connections>
+                        <action selector="toggleNavigationBarVisibility:" destination="fd2-lK-HcB" id="atD-RO-9UO"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="1384" y="68"/>
+        </scene>
+        <!--Flickr Search Results View Controller-->
+        <scene sceneID="Djr-mU-C0T">
+            <objects>
+                <viewController storyboardIdentifier="FlickSearchResultsViewController" id="bBa-OQ-WzR" customClass="FlickrSearchResultsViewController" customModule="FlickrSearch" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Y8u-KL-oV3">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vXO-2v-Xge">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PhotoTableViewCell" id="s8w-OL-gxr" customClass="PhotoTableViewCell" customModule="FlickrSearch" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="122.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="s8w-OL-gxr" id="w8t-rc-tg3">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="122.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="252" verticalHuggingPriority="251" placeholderIntrinsicWidth="100" placeholderIntrinsicHeight="100" translatesAutoresizingMaskIntoConstraints="NO" id="TwF-fa-5xC">
+                                                    <rect key="frame" x="20" y="11.5" width="100" height="100"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="100" id="Qoi-gu-4rD"/>
+                                                        <constraint firstAttribute="width" secondItem="TwF-fa-5xC" secondAttribute="height" multiplier="1:1" id="ghe-qU-cLA"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="800" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="njf-c2-BTh">
+                                                    <rect key="frame" x="128" y="49.5" width="266" height="24"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="Oxh-Sx-UQg">
+                                                    <rect key="frame" x="51.5" y="43" width="37" height="37"/>
+                                                </activityIndicatorView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="TwF-fa-5xC" firstAttribute="top" relation="greaterThanOrEqual" secondItem="w8t-rc-tg3" secondAttribute="topMargin" id="3UP-gQ-LTv"/>
+                                                <constraint firstItem="TwF-fa-5xC" firstAttribute="leading" secondItem="w8t-rc-tg3" secondAttribute="leadingMargin" id="68V-qD-pld"/>
+                                                <constraint firstItem="TwF-fa-5xC" firstAttribute="top" secondItem="w8t-rc-tg3" secondAttribute="topMargin" priority="750" id="7cv-cF-1YM"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="njf-c2-BTh" secondAttribute="trailing" id="Cfq-EX-JMI"/>
+                                                <constraint firstItem="njf-c2-BTh" firstAttribute="leading" secondItem="TwF-fa-5xC" secondAttribute="trailing" constant="8" symbolic="YES" id="Dbh-ga-GEl"/>
+                                                <constraint firstItem="njf-c2-BTh" firstAttribute="centerY" secondItem="w8t-rc-tg3" secondAttribute="centerY" id="JH5-nv-fnD"/>
+                                                <constraint firstItem="Oxh-Sx-UQg" firstAttribute="centerX" secondItem="TwF-fa-5xC" secondAttribute="centerX" id="Mri-s2-bbM"/>
+                                                <constraint firstItem="Oxh-Sx-UQg" firstAttribute="centerY" secondItem="TwF-fa-5xC" secondAttribute="centerY" id="QGP-lF-9fI"/>
+                                                <constraint firstItem="TwF-fa-5xC" firstAttribute="centerY" secondItem="w8t-rc-tg3" secondAttribute="centerY" id="cNV-GE-epm"/>
+                                                <constraint firstItem="njf-c2-BTh" firstAttribute="top" relation="greaterThanOrEqual" secondItem="w8t-rc-tg3" secondAttribute="topMargin" id="kHm-hK-Eb2"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="TwF-fa-5xC" secondAttribute="bottom" priority="750" id="uAT-Hf-8wy"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="downloadIndicator" destination="Oxh-Sx-UQg" id="rwR-FP-vQ9"/>
+                                            <outlet property="photoView" destination="TwF-fa-5xC" id="fBl-sC-j0H"/>
+                                            <outlet property="titleLabel" destination="njf-c2-BTh" id="pe3-NF-vww"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="vXO-2v-Xge" firstAttribute="top" secondItem="Y8u-KL-oV3" secondAttribute="top" id="Npd-lF-DwD"/>
+                            <constraint firstAttribute="bottom" secondItem="vXO-2v-Xge" secondAttribute="bottom" id="PZZ-lF-71M"/>
+                            <constraint firstAttribute="trailing" secondItem="vXO-2v-Xge" secondAttribute="trailing" id="wm6-zT-GCF"/>
+                            <constraint firstItem="vXO-2v-Xge" firstAttribute="leading" secondItem="Y8u-KL-oV3" secondAttribute="leading" id="zSn-0B-hbw"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="svU-rm-AV7"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="vXO-2v-Xge" id="WI8-HZ-Xt4"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9lE-Y8-2E8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1429" y="-630"/>
         </scene>
     </scenes>
 </document>

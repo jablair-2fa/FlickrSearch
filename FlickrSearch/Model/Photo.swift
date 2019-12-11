@@ -9,7 +9,7 @@
 import Foundation
 
 /// Minimum required representation of a Flickr Photo
-struct Photo: Codable, Equatable {
+struct Photo: Codable, Hashable {
     /// Photo ID
     let id: String
     /// The farm subdomain ID
