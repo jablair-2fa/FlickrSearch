@@ -17,6 +17,14 @@ JSON parsing is done with `Decodable`, with some custom decoding initializers.
 * Full-screen photo viewer
 * Supports multiple pages of Flickr results
 
+## Searching
+
+Searches are submitted when tapping the Search button. They are not sent live.
+
+## Navigation
+
+Navigation is handled with a standard UINavigationController stack. To navigate back from the photo viewer to the results list, make sure the navigation bar is visible. If it's not, tap on the image to toggle the visibility.
+
 ## Requirements
 iOS 13
 
