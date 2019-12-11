@@ -58,7 +58,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		AA44D41F239F2A7A00875D47 /* FlickrSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlickrSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA44D41F239F2A7A00875D47 /* Flickr Findr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Flickr Findr.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA44D422239F2A7A00875D47 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AA44D424239F2A7A00875D47 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		AA44D426239F2A7A00875D47 /* FlickrSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrSearchViewController.swift; sourceTree = "<group>"; };
@@ -137,7 +137,7 @@
 		AA44D420239F2A7A00875D47 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				AA44D41F239F2A7A00875D47 /* FlickrSearch.app */,
+				AA44D41F239F2A7A00875D47 /* Flickr Findr.app */,
 				AA44D437239F2A7E00875D47 /* FlickrSearchTests.xctest */,
 				AA44D442239F2A7E00875D47 /* FlickrSearchUITests.xctest */,
 			);
@@ -274,9 +274,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		AA44D41E239F2A7A00875D47 /* FlickrSearch */ = {
+		AA44D41E239F2A7A00875D47 /* Flickr Findr */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AA44D44B239F2A7E00875D47 /* Build configuration list for PBXNativeTarget "FlickrSearch" */;
+			buildConfigurationList = AA44D44B239F2A7E00875D47 /* Build configuration list for PBXNativeTarget "Flickr Findr" */;
 			buildPhases = (
 				AA44D41B239F2A7A00875D47 /* Sources */,
 				AA44D41C239F2A7A00875D47 /* Frameworks */,
@@ -286,9 +286,9 @@
 			);
 			dependencies = (
 			);
-			name = FlickrSearch;
+			name = "Flickr Findr";
 			productName = FlickrSearch;
-			productReference = AA44D41F239F2A7A00875D47 /* FlickrSearch.app */;
+			productReference = AA44D41F239F2A7A00875D47 /* Flickr Findr.app */;
 			productType = "com.apple.product-type.application";
 		};
 		AA44D436239F2A7E00875D47 /* FlickrSearchTests */ = {
@@ -363,7 +363,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				AA44D41E239F2A7A00875D47 /* FlickrSearch */,
+				AA44D41E239F2A7A00875D47 /* Flickr Findr */,
 				AA44D436239F2A7E00875D47 /* FlickrSearchTests */,
 				AA44D441239F2A7E00875D47 /* FlickrSearchUITests */,
 			);
@@ -452,12 +452,12 @@
 /* Begin PBXTargetDependency section */
 		AA44D439239F2A7E00875D47 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = AA44D41E239F2A7A00875D47 /* FlickrSearch */;
+			target = AA44D41E239F2A7A00875D47 /* Flickr Findr */;
 			targetProxy = AA44D438239F2A7E00875D47 /* PBXContainerItemProxy */;
 		};
 		AA44D444239F2A7E00875D47 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = AA44D41E239F2A7A00875D47 /* FlickrSearch */;
+			target = AA44D41E239F2A7A00875D47 /* Flickr Findr */;
 			targetProxy = AA44D443239F2A7E00875D47 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -607,7 +607,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = co.room45.FlickrSearch;
+				PRODUCT_BUNDLE_IDENTIFIER = "co.room45.Flickr-Findr";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -625,7 +625,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = co.room45.FlickrSearch;
+				PRODUCT_BUNDLE_IDENTIFIER = "co.room45.Flickr-Findr";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -728,7 +728,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AA44D44B239F2A7E00875D47 /* Build configuration list for PBXNativeTarget "FlickrSearch" */ = {
+		AA44D44B239F2A7E00875D47 /* Build configuration list for PBXNativeTarget "Flickr Findr" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AA44D44C239F2A7E00875D47 /* Debug */,

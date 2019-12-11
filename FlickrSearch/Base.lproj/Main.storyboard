@@ -23,10 +23,10 @@
             </objects>
             <point key="canvasLocation" x="-38" y="-630"/>
         </scene>
-        <!--FlickrSearch-->
+        <!--Flickr Findr-->
         <scene sceneID="smW-Zh-WAh">
             <objects>
-                <tableViewController title="FlickrSearch" clearsSelectionOnViewWillAppear="NO" id="7bK-jq-Zjz" customClass="FlickrSearchViewController" customModule="FlickrSearch" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Flickr Findr" clearsSelectionOnViewWillAppear="NO" id="7bK-jq-Zjz" customClass="FlickrSearchViewController" customModule="FlickrSearch" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="r7i-6Z-zg0">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -56,7 +56,7 @@
                             <outlet property="delegate" destination="7bK-jq-Zjz" id="RA6-mI-bju"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="FlickrSearch" id="Zdf-7t-Un8"/>
+                    <navigationItem key="navigationItem" title="Flickr Findr" id="Zdf-7t-Un8"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rux-fX-hf1" sceneMemberID="firstResponder"/>
             </objects>
